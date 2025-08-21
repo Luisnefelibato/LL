@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luis CRM - Sistema IA Avanzado</title>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <div class="container">
+        <div class="vendor-header">
+            <div class="vendor-avatar">🤖</div>
+            <h1 class="vendor-name">Luis Martínez</h1>
+            <p class="vendor-title">Sistema IA de Ventas</p>
+            <p class="vendor-tagline">TechStore Bogotá - CRM Inteligente</p>
+        </div>
+
+        <div class="main-tabs">
+            <button class="tab-button active" onclick="switchTab('calls')">
+                <i class="fas fa-phone"></i> Llamadas
+            </button>
+            <button class="tab-button" onclick="switchTab('search')">
+                <i class="fas fa-search"></i> Buscar Clientes
+            </button>
+            <button class="tab-button" onclick="switchTab('crm')">
+                <i class="fas fa-database"></i> Base de Datos
+            </button>
+            <button class="tab-button" onclick="switchTab('reports')">
+                <i class="fas fa-chart-line"></i> Informes
+            </button>
+        </div>
+
+        <!-- PESTAÑA DE LLAMADAS -->
+        <div id="calls" class="tab-content active">
+            <div class="call-interface">
+                <div class="call-status waiting" id="callStatus">
+                    🤖 Sistema IA listo - Micrófono siempre activo
+                    <span class="microphone-indicator" id="micIndicator"></span>
+                </div>
+
+                <div class="audio-visualizer" id="audioVisualizer">
+                    <div class="audio-wave"></div>
+                </div>
+
+                <div class="real-time-transcript" id="transcript">
+                    Sistema optimizado para conversación fluida con interrupción natural ⚡
+                </div>
+
+                <div class="call-controls">
+                    <button class="call-button" id="callButton">
+                        <i class="fas fa-phone"></i> Iniciar Llamada
+                    </button>
+                    <button class="control-button" id="volumeButton">
+                        <i class="fas fa-volume-up"></i> Volumen: Alto
+                    </button>
+                    <button class="control-button" id="stopButton" style="display: none;">
+                        <i class="fas fa-stop"></i> Parar
+                    </button>
+                </div>
+
+                <div class="stats-display" id="statsDisplay">
+                    <div class="stat-item">
+                        <div class="stat-value" id="responseTime">~500ms</div>
+                        <div class="stat-label">Tiempo IA</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="interactions">0</div>
+                        <div class="stat-label">Interacciones</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="micStatus">OFF</div>
+                        <div class="stat-label">Micrófono</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="luisStatus">Listo</div>
+                        <div class="stat-label">Luis IA</div>
+                    </div>
+                </div>
+
+                <div class="conversation-display" id="conversationDisplay">
+                    <!-- Conversaciones aparecerán aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA DE BÚSQUEDA DE CLIENTES -->
+        <div id="search" class="tab-content">
+            <div class="search-container">
+                <h3 style="color: #ffffff; margin-bottom: 20px;">
+                    <i class="fas fa-search"></i> Búsqueda Inteligente de Clientes
+                </h3>
+                
+                <div class="search-filters">
+                    <div class="filter-group">
+                        <label class="filter-label">Sector:</label>
+                        <select class="filter-select" id="sectorFilter">
+                            <option value="">Todos los sectores</option>
+                            <option value="restaurante">Restaurantes</option>
+                            <option value="tienda">Tiendas</option>
+                            <option value="oficina">Oficinas</option>
+                            <option value="clinica">Clínicas</option>
+                            <option value="hotel">Hoteles</option>
+                            <option value="educacion">Educación</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Zona Bogotá:</label>
+                        <select class="filter-select" id="zoneFilter">
+                            <option value="">Toda Bogotá</option>
+                            <option value="chapinero">Chapinero</option>
+                            <option value="zona-rosa">Zona Rosa</option>
+                            <option value="centro">Centro</option>
+                            <option value="norte">Norte</option>
+                            <option value="sur">Sur</option>
+                            <option value="occidente">Occidente</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label class="filter-label">Presupuesto:</label>
+                        <select class="filter-select" id="budgetFilter">
+                            <option value="">Cualquier presupuesto</option>
+                            <option value="bajo">500K - 1M</option>
+                            <option value="medio">1M - 3M</option>
+                            <option value="alto">3M - 6M</option>
+                            <option value="premium">6M+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="search-button" onclick="searchClients()">
+                    <i class="fas fa-search"></i> Buscar Clientes
+                </button>
+
+                <div id="clientsList" class="clients-list">
+                    <!-- Resultados aparecerán aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA CRM/BASE DE DATOS -->
+        <div id="crm" class="tab-content">
+            <div class="crm-dashboard">
+                <div class="crm-card">
+                    <div class="crm-title">
+                        <i class="fas fa-users"></i> Total Clientes
+                    </div>
+                    <div class="crm-value" id="totalClients">0</div>
+                    <div style="color: #888888;">Registrados</div>
+                </div>
+                
+                <div class="crm-card">
+                    <div class="crm-title">
+                        <i class="fas fa-phone"></i> Llamadas Hoy
+                    </div>
+                    <div class="crm-value" id="callsToday">0</div>
+                    <div style="color: #888888;">Realizadas</div>
+                </div>
+                
+                <div class="crm-card">
+                    <div class="crm-title">
+                        <i class="fas fa-chart-line"></i> Conversión
+                    </div>
+                    <div class="crm-value" id="conversionRate">0%</div>
+                    <div style="color: #888888;">Éxito</div>
+                </div>
+                
+                <div class="crm-card">
+                    <div class="crm-title">
+                        <i class="fas fa-dollar-sign"></i> Ventas Mes
+                    </div>
+                    <div class="crm-value" id="salesMonth">$0</div>
+                    <div style="color: #888888;">Facturado</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3 style="color: #ffffff; margin-bottom: 15px;">
+                    <i class="fas fa-database"></i> Base de Datos Clientes
+                </h3>
+                
+                <div style="margin-bottom: 20px;">
+                    <input type="text" class="filter-input" placeholder="Buscar cliente..." 
+                           id="searchClient" style="width: 300px; margin-right: 10px;">
+                    <button class="search-button" onclick="filterClients()">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                    <button class="search-button" onclick="exportData()" style="margin-left: 10px;">
+                        <i class="fas fa-download"></i> Exportar
+                    </button>
+                </div>
+
+                <div id="crmClientsList" class="clients-list" style="max-height: 500px;">
+                    <!-- Base de datos de clientes aparecerá aquí -->
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA DE INFORMES -->
+        <div id="reports" class="tab-content">
+            <div class="reports-container">
+                <h3 style="color: #ffffff; margin-bottom: 20px;">
+                    <i class="fas fa-chart-bar"></i> Analytics e Informes IA
+                </h3>
+                
+                <div style="margin-bottom: 20px;">
+                    <button class="search-button" onclick="generateReport()">
+                        <i class="fas fa-plus"></i> Generar Informe
+                    </button>
+                    <button class="search-button" onclick="exportReport()" style="margin-left: 10px;">
+                        <i class="fas fa-file-alt"></i> Exportar
+                    </button>
+                    <button class="search-button" onclick="clearAllReports()" style="margin-left: 10px;">
+                        <i class="fas fa-trash"></i> Limpiar Todo
+                    </button>
+                </div>
+
+                <div id="reportDisplay">
+                    <div style="text-align: center; color: #888888; padding: 40px;">
+                        <i class="fas fa-clipboard" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                        <h3>No hay informes generados aún</h3>
+                        <p>Realiza una llamada y genera un informe automático con IA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
