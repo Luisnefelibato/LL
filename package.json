@@ -1,0 +1,14 @@
+{
+  "name": "luis-crm-ai-system",
+  "version": "1.0.0",
+  "description": "Sistema IA de ventas Luis Martinez - TechStore",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'Build completed'",
+    "start": "vercel dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vercel/node": "^3.0.0"
+  }
+}
